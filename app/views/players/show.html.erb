@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Deposit address:</strong>
+  <%= @player.deposit_address %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @balance %>
+</p>
+
+<% if @result %>
+  <p>
+    <strong>You won:</strong>
+    <%= @result %>
+  </p>
+<% end %>
+
+
+
+<%= form_for(@player, url: open_chest_path, html: { method: :post }) do |form| %>
+  <%= form.hidden_field :id, value: @player.id %>
+  <%= form.submit 'Open chest', class: 'btn btn-primary' %>
+<% end %>
+
+
+<%= form_for(@player, url: cashout_path, html: { method: :post }) do |form| %>
+  <%= form.hidden_field :id, value: @player.id %>
+  <%= form.submit 'Cashout', class: 'btn btn-primary' %>
+<% end %>
