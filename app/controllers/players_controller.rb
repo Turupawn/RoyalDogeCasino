@@ -3,16 +3,39 @@ class PlayersController < ApplicationController
 
   def open_chest
     @player = Player.find_by_id(params['player']['id'])
-    # TODO: Open chest logic
-    @balance = 2500
-    @result = rand(10)
+
+    @balance = get_balance @player
+
+    if @balance < CHEST_COST
+      respond_to do |format|
+        format.html { redirect_to @player, notice: 'Not enough balance.' }
+      end
+      return
+    end
+
+    @chest = Chest.new
+    @chest.player_id = @player.id
+    @chest.cost = CHEST_COST
+    rewards = [10,7,7,6,6,4,4,3,3,3,1]
+    @chest.reward = rewards[rand(11)]
+
+    @balance -= @chest.cost
+    @balance += @chest.reward
+
+    @chest.save
+
     render "show"
   end
 
   def cashout
     @player = Player.find_by_id(params['player']['id'])
-    # TODO: Cashout logic
-    @balance = 2500
+    @balance = get_balance @player
+
+    @withdraw = Withdraw.new
+    @withdraw.player_id = @player.id
+    @withdraw.amount = @balance
+    @withdraw.save
+
     render "show"
   end
 
@@ -25,8 +48,7 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
-    # Todo: Handle repeated code?
-    @balance = 2500
+    @balance = get_balance @player
   end
 
   # GET /players/new
@@ -51,7 +73,12 @@ class PlayersController < ApplicationController
     else
       @player = Player.new(player_params)
 
-      # TODO: set @player.deposit_address
+      client = DogecoinClient.new
+      if client.valid?
+        @player.deposit_address = client.get_new_address
+      else
+        # TODO: Handle invalid client
+      end
 
       respond_to do |format|
         if @player.save
@@ -98,5 +125,23 @@ class PlayersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def player_params
       params.require(:player).permit(:deposit_address, :cashout_address, :result)
+    end
+
+    def get_balance player
+      client = DogecoinClient.new
+      balance = 0
+      if client.valid?
+        balance += client.get_balance(player.deposit_address)
+      else
+        # TODO: Handle invalid client
+      end
+      player.withdraws.each do |withdraw|
+        balance-=withdraw.amount
+      end
+      player.chests.each do |chest|
+        balance-=chest.cost
+        balance+=chest.reward
+      end
+      return balance
     end
 end

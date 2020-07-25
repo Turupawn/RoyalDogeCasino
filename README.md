@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# TODO
+
+* Don't allow players to play games with ids in the URLs (only hashes are allowed)

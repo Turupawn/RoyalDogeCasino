@@ -1,0 +1,1 @@
+CHEST_COST = 5
