@@ -131,7 +131,7 @@ class PlayersController < ApplicationController
       client = DogecoinClient.new
       balance = 0
       if client.valid?
-        balance += client.get_balance(player.deposit_address)
+        balance += client.get_received_by_address(player.deposit_address)
       else
         # TODO: Handle invalid client
       end

@@ -26,3 +26,4 @@ Things you may want to cover:
 # TODO
 
 * Don't allow players to play games with ids in the URLs (only hashes are allowed)
+* Implement send_to_address with subtractfeefromamount in cashout
