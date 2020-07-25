@@ -3,5 +3,5 @@ DogecoinClient.configure do |config|
   config.port = 22555
   config.protocol = :http
   config.user = 'dogecoinrpc'
-  config.password = ''
+  config.password = ENV['DOGECOIN_RPC_PASSWORD']
 end
