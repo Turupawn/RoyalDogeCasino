@@ -31,6 +31,20 @@ class PlayersController < ApplicationController
     @player = Player.find_by_id(params['player']['id'])
     @balance = get_balance @player
 
+    if @balance < 2
+      respond_to do |format|
+        format.html { redirect_to @player, notice: 'Not enough balance for cashout.' }
+      end
+      return
+    end
+
+    client = DogecoinClient.new
+    if client.valid?
+      client.send_to_address(@player.address, @balance - TAX_FEE)
+    else
+      # TODO: Handle invalid dogecoin client
+    end
+
     @withdraw = Withdraw.new
     @withdraw.player_id = @player.id
     @withdraw.amount = @balance
