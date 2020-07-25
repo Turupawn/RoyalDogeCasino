@@ -119,7 +119,7 @@ class PlayersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_player
-      @player = Player.find(params[:id])
+      @player = Player.find_by_hashid(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
