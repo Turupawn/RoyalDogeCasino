@@ -1,10 +1,10 @@
 Hashid::Rails.configure do |config|
     # The salt to use for generating hashid. Prepended with table name.
-    config.salt = "Fly me to the moon"
+    config.salt = ENV.fetch('HASHID_SALT')
   
     # The minimum length of generated hashids
-    config.min_hash_length = 6
-  
+    config.min_hash_length = 34
+
     # The alphabet to use for generating hashids
     config.alphabet = "abcdefghijklmnopqrstuvwxyz" \
                       "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
