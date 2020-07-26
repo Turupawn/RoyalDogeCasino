@@ -1,6 +1,6 @@
 class CasinoController < ApplicationController
-  def withdraw_superplus
-    self.withdraw_superplus
+  def withdraw_dogecoins
+    withdraw_superplus
   end
   private
     def get_balance player
