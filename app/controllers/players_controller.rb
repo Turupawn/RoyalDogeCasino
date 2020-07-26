@@ -40,7 +40,7 @@ class PlayersController < ApplicationController
 
     client = DogecoinClient.new
     if client.valid?
-      client.send_to_address(@player.address, @balance - TAX_FEE)
+      client.send_to_address(@player.cashout_address, @balance - TAX_FEE)
     else
       # TODO: Handle invalid dogecoin client
     end
