@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :hour do # Many shortcuts available: :hour, :day, :month, :year, :reboot
+every 7.minute do # Many shortcuts available: :hour, :day, :month, :year, :reboot
     runner "CasinoController.new.withdraw_dogecoins"
 end
