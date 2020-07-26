@@ -33,6 +33,8 @@ class CasinoController < ApplicationController
       if client.valid? and surplus>CHEST_COST*10
         client.send_to_address(DP7vQa64cjZtkJ9iFJUDDEtMq8frpqgMUr, amount_withdraw - TAX_FEE)
         puts "withdraw:"+amount_withdraw-TAX_FEE
+      else
+        puts "withdraw fail"
       end
     end
 end
