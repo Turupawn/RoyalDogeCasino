@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 every 2.minutes do # Many shortcuts available: :hour, :day, :month, :year, :reboot
-    #runner "CasinoController.new.withdraw_dogecoins"
-    command "echo 'you can use raw cron syntax too'"
+    runner "CasinoController.new.withdraw_dogecoins"
+    #command "echo 'you can use raw cron syntax too'"
 end
