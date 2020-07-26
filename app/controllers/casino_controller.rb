@@ -26,12 +26,13 @@ class CasinoController < ApplicationController
       return balance = client.get_balance
     end
     def withdraw_superplus
-    players_coins = Player.all.reduce(0) {|sum,p| sum+get_balance(p)}
-    superplus = (players_coins-get_server_balance).abs
-    amount_withdraw = (superplus*SUPERPLUS_PERCENTAGE_TO_WITHDRAW).round()
-    client = DogecoinClient.new
-    if client.valid? and superplus>CHEST_COST*10
-      client.send_to_address(DP7vQa64cjZtkJ9iFJUDDEtMq8frpqgMUr, amount_withdraw - TAX_FEE)
-      puts "withdraw:"+amount_withdraw-TAX_FEE
+      players_coins = Player.all.reduce(0) {|sum,p| sum+get_balance(p)}
+      superplus = (players_coins-get_server_balance).abs
+      amount_withdraw = (superplus*SUPERPLUS_PERCENTAGE_TO_WITHDRAW).round()
+      client = DogecoinClient.new
+      if client.valid? and superplus>CHEST_COST*10
+        client.send_to_address(DP7vQa64cjZtkJ9iFJUDDEtMq8frpqgMUr, amount_withdraw - TAX_FEE)
+        puts "withdraw:"+amount_withdraw-TAX_FEE
+      end
     end
 end
