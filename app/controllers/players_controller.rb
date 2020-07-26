@@ -50,7 +50,9 @@ class PlayersController < ApplicationController
     @withdraw.amount = @balance
     @withdraw.save
 
-    render "show"
+    respond_to do |format|
+      format.html { redirect_to @player, notice: 'You just cashed out.' }
+    end
   end
 
   # GET /players/1
