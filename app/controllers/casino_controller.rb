@@ -26,5 +26,4 @@ class CasinoController < ApplicationController
       balance = 0
       return balance = client.get_balance
     end
-  end
 end
