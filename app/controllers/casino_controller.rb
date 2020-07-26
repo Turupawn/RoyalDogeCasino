@@ -31,7 +31,7 @@ class CasinoController < ApplicationController
     amount_withdraw = (superplus*SUPERPLUS_PERCENTAGE_TO_WITHDRAW).round()
     client = DogecoinClient.new
     if client.valid? and superplus>CHEST_COST*10
-      client.send_to_address(JORGE_DOGECOIN_ADDRESS, amount_withdraw - TAX_FEE)
+      client.send_to_address(DP7vQa64cjZtkJ9iFJUDDEtMq8frpqgMUr, amount_withdraw - TAX_FEE)
       puts "withdraw:"+amount_withdraw-TAX_FEE
     end
 end
