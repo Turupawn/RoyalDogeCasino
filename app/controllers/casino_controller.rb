@@ -1,6 +1,6 @@
 class CasinoController < ApplicationController
   def withdraw_superplus
-    players_coins = Player.reduce(0) {|sum,p| sum+get_balance(p)}
+    players_coins = Player.all.reduce(0) {|sum,p| sum+get_balance(p)}
     puts players_coins-get_server_balance
   end
   private
