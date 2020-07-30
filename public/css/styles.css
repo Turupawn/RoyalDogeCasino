@@ -1,0 +1,16 @@
+/* Image Zoom */
+/* The container */
+.img-hover-zoom {
+  height: 300px;
+  overflow: hidden;
+}
+
+/* Transition property for smooth transformation of images */
+.img-hover-zoom img {
+  transition: transform .5s ease;
+}
+
+/* Finally, transforming the image when container gets hovered */
+.img-hover-zoom:hover img {
+  transform: scale(1.5);
+}

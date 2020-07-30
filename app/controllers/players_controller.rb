@@ -17,7 +17,8 @@ class PlayersController < ApplicationController
     @chest.player_id = @player.id
     @chest.cost = CHEST_COST
     rewards = [10,7,7,6,6,4,4,3,3,3,1]
-    @chest.reward = rewards[rand(11)]
+    @reward = rewards[rand(11)]
+    @chest.reward = @reward
 
     @balance -= @chest.cost
     @balance += @chest.reward

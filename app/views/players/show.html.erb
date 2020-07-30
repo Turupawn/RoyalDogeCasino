@@ -1,31 +1,51 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Deposit address:</strong>
+  <strong>Deposit here:</strong>
   <%= @player.deposit_address %>
 </p>
 
 <p>
-  <strong>Balance:</strong>
+  <strong>Your balance:</strong>
   <%= @balance %>
 </p>
 
-<% if @result %>
+<% if @reward %>
   <p>
-    <strong>You won:</strong>
-    <%= @result %>
+    <strong>You opened a chest!</strong>
+    <img src="/img/chests/<%= @reward %>.png">
   </p>
 <% end %>
-
-
-
-<%= form_for(@player, url: open_chest_path, html: { method: :post }) do |form| %>
-  <%= form.hidden_field :id, value: @player.id %>
-  <%= form.submit 'Open chest', class: 'btn btn-primary' %>
-<% end %>
-
 
 <%= form_for(@player, url: cashout_path, html: { method: :post }) do |form| %>
   <%= form.hidden_field :id, value: @player.id %>
   <%= form.submit 'Cashout', class: 'btn btn-primary' %>
 <% end %>
+
+<div class="mdc-data-table">
+  <div class="mdc-data-table__table-container" style="border-style:hidden">
+    <table class="mdc-data-table__table" aria-label="Dessert calories">
+      <% for i in 0..9 %>
+        <% if i%3==0 %>
+          <tr class="mdc-data-table__header-row">
+        <% end %>
+        <td class="mdc-data-table__cell">
+          <%= form_for(@player, url: open_chest_path, html: { method: :post, id: "chest_form_"+i.to_s }) do |form| %>
+            <%= form.hidden_field :id, value: @player.id %>
+            <div class="img-hover-zoom">
+              <img id="chest_img_<%= i %>" src="/img/chests/closed.png">
+            </div>
+          <% end %>
+          <script>
+            $( "#chest_img_<%= i %>" ).click(function() {
+              $( "#chest_form_<%= i %>" ).submit();
+            });
+          </script>
+        </td>
+        <% if i%3==2 %>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>

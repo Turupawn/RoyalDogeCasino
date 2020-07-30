@@ -11,12 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :cashout_address %>
-    <%= form.text_field :cashout_address %>
-  </div>
+  <!-- Render textfield component -->
+  <label class="mdc-text-field mdc-text-field--filled">
+    <span class="mdc-text-field__ripple"></span>
+    <span class="mdc-floating-label" id="my-label">Your cashout address</span>
+    <%= form.text_field :cashout_address, class: 'mdc-text-field__input' %>
+    <span class="mdc-line-ripple"></span>
+  </label>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <button type="submit" class="mdc-button mdc-button--outlined">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">Play!</span>
+  </button>
 <% end %>
