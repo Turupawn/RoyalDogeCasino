@@ -29,4 +29,6 @@ Things you may want to cover:
 
 # TODO
 
-* Implement send_to_address with subtractfeefromamount in cashout
+* Show balance with confirmation pending
+* Apply material.io layouts
+* Make doge themes layouts (doge images, phrases and comic sans)
