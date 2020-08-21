@@ -73,12 +73,9 @@ class PlayersController < ApplicationController
     existing_player = Player.find_by_cashout_address(player_params[:cashout_address])
     client = DogecoinClient.new
     
-    if client.valid?
-     client.validate_address(player_params[:cashout_address])
-     puts client.validate_address(player_params[:cashout_address])
-    else
-     # TODO: Handle invalid client
-     puts "not valid"
+    if !client.valid? || !client.validate_address(player_params[:cashout_address])["isvalid"]
+     redirect_to root_path, notice: "Please write a valid address"
+     return
     end
 
     if existing_player
