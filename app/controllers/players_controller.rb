@@ -71,6 +71,12 @@ class PlayersController < ApplicationController
   # POST /players.json
   def create
     existing_player = Player.find_by_cashout_address(player_params[:cashout_address])
+    client = DogecoinClient.new
+    
+    if !client.valid? || !client.validate_address(player_params[:cashout_address])["isvalid"]
+     redirect_to root_path, notice: "Please write a valid address"
+     return
+    end
 
     if existing_player
       respond_to do |format|
@@ -79,8 +85,7 @@ class PlayersController < ApplicationController
       end
     else
       @player = Player.new(player_params)
-
-      client = DogecoinClient.new
+      
       if client.valid?
         @player.deposit_address = client.get_new_address
       else
