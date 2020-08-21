@@ -7,13 +7,12 @@
 
 <p>
   <strong>Your balance:</strong>
-  <%= @balance %>
+  <%= @balance %>Ð
 </p>
 
 <% if @balance != @unconfirmed_balance %>
   <p>
-    <strong>You have unconfirmed balance, please wait:</strong>
-    <%= @unconfirmed_balance %>
+    <strong><%= @unconfirmed_balance - @balance  %>Ð wating confirmation, please wait...</strong>
   </p>
 <% end %>
 

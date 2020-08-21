@@ -25,7 +25,9 @@ class PlayersController < ApplicationController
 
     @chest.save
 
-    render "show"
+    respond_to do |format|
+      format.html { redirect_to player_url(@player, reward: @reward), notice: 'You just opened a chest!' }
+    end
   end
 
   def cashout
@@ -59,6 +61,7 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
+    @reward = params[:reward]
     @balance = get_balance @player
     @unconfirmed_balance = get_unconfirmed_balance @player
   end
