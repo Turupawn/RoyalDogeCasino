@@ -10,6 +10,13 @@
   <%= @balance %>
 </p>
 
+<% if @balance != @unconfirmed_balance %>
+  <p>
+    <strong>You have unconfirmed balance, please wait:</strong>
+    <%= @unconfirmed_balance %>
+  </p>
+<% end %>
+
 <% if @reward %>
   <p>
     <strong>You opened a chest!</strong>

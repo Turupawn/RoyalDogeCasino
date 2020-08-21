@@ -27,6 +27,10 @@ Things you may want to cover:
 
 * HASHID_SALT
 
+# RPC calls documentation
+
+https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_calls_list
+
 # TODO
 
 * Show balance with confirmation pending

@@ -60,6 +60,7 @@ class PlayersController < ApplicationController
   # GET /players/1.json
   def show
     @balance = get_balance @player
+    @unconfirmed_balance = get_unconfirmed_balance @player
   end
 
   # GET /players/new
@@ -120,6 +121,24 @@ class PlayersController < ApplicationController
       balance = 0
       if client.valid?
         balance += client.get_received_by_address(player.deposit_address)
+      else
+        # TODO: Handle invalid client
+      end
+      player.withdraws.each do |withdraw|
+        balance-=withdraw.amount
+      end
+      player.chests.each do |chest|
+        balance-=chest.cost
+        balance+=chest.reward
+      end
+      return balance
+    end
+
+    def get_unconfirmed_balance player
+      client = DogecoinClient.new
+      balance = 0
+      if client.valid?
+        balance += client.get_received_by_address(player.deposit_address, 0)
       else
         # TODO: Handle invalid client
       end
