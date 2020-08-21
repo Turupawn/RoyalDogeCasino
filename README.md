@@ -33,6 +33,5 @@ https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_calls_list
 
 # TODO
 
-* Show balance with confirmation pending
 * Apply material.io layouts
 * Make doge themes layouts (doge images, phrases and comic sans)
